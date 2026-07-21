@@ -1,0 +1,130 @@
+aid: euronext
+name: Euronext
+review:
+  question: Does Euronext expose a public, self-serve developer API for market data?
+  answer: false
+  date: '2026-07-21'
+  reviewer: API Evangelist
+  openapiHarvested: false
+  openapiScopeNote: |
+    No machine-readable OpenAPI, Swagger, or AsyncAPI document is publicly
+    published for any Euronext API. All API documentation is distributed as
+    PDF client specifications on euronext.com and the Euronext Connect
+    portal (connect.euronext.com / connect2.euronext.com). The verified
+    GitHub organization (github.com/euronext) contains only forks of
+    infrastructure libraries (simple-binary-encoding, librdkafka, tcpflow,
+    simplx, libxslt, PcapPlusPlus) and no API definitions, so nothing was
+    harvested into openapi/.
+findings:
+  summary: |
+    Euronext is an exchange data arm with a classically sales-gated,
+    entitlement-managed market data posture. There is no developer portal
+    (developer.euronext.com, docs.euronext.com, and api.euronext.com do not
+    resolve - DNS failure on probe) and no self-serve signup, free tier, or
+    public pricing page for data. The real, documented API surface is:
+    (1) Euronext Web Services - a commercial JSON-over-HTTPS API for
+    real-time, delayed, historical (EOD summary), reference, and index
+    data, POST-only, authenticated with a user token, where the endpoint
+    URL and key are issued to the client only at onboarding, so no public
+    base URL exists; (2) the Saturn REST API for MiFID II regulatory
+    reporting (JSON/XML/CSV, HTTPS logon returning an Authorization-header
+    token, accounts via market-access@euronext.com); and (3) the Optiq
+    Market Data Gateway, a UDP multicast SBE feed (LZ4-compressed
+    snapshots, MDG Lite and cloud variants) that is not HTTP at all.
+    Optiq flat-file specifications document additional file-based
+    delivery. Client specifications are genuinely public PDFs, which is
+    more transparent than many exchange data arms, but every live
+    endpoint sits behind a market data agreement or membership. Contacts
+    are webservices@euronext.com and databyeuronext@euronext.com.
+  posture: sales-gated
+  authentication:
+    - api: Euronext Web Services
+      model: User token issued at integration onboarding; POST-only JSON over HTTPS
+    - api: Saturn Reporting API
+      model: HTTPS logon with encrypted credentials returning a session token passed in the Authorization HTTP header
+    - api: Optiq MDG
+      model: Entitlement-managed market data agreement plus network connectivity provisioning (no HTTP auth)
+  transports:
+    - protocol: REST
+      scheme: https
+      note: Euronext Web Services (JSON, POST-only) and Saturn reporting web services (JSON/XML/CSV). No public base URL documented for either; URLs issued to clients.
+      documented: true
+    - protocol: UDP multicast (SBE)
+      scheme: udp
+      note: Optiq Market Data Gateway real-time and snapshot feeds, Simple Binary Encoding with LZ4 block compression; MDG Lite and cloud delivery variants.
+      documented: true
+    - protocol: Flat files
+      scheme: https
+      note: Optiq file-based delivery documented in the public Optiq File Specifications PDFs.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No public WebSocket API is documented.
+  probes:
+    - url: https://developer.euronext.com
+      status: 0
+      note: Does not resolve (DNS failure)
+    - url: https://docs.euronext.com
+      status: 0
+      note: Does not resolve (DNS failure)
+    - url: https://api.euronext.com
+      status: 0
+      note: Does not resolve (DNS failure)
+    - url: https://www.euronext.com/en/apis
+      status: 404
+    - url: https://www.euronext.com/developers
+      status: 404
+    - url: https://connect.euronext.com
+      status: 200
+      note: Euronext Connect client portal (login-gated content, public IT documentation index)
+    - url: https://connect.euronext.com/en/it-documentation
+      status: 200
+    - url: https://www.euronext.com/en/data/how-access-market-data/web-services
+      status: 200
+    - url: https://connect2.euronext.com/en/data/client-specifications
+      status: 200
+    - url: https://connect2.euronext.com/sites/default/files/documentation/data/ews_api_-_historical_data_client_specification.pdf
+      status: 200
+      note: Fetched and read - confirms JSON, POST-only, token auth, URL issued at onboarding
+    - url: https://connect2.euronext.com/sites/default/files/documentation/data/EWS%20API%20-%20Indices%20-%20Client%20Specification_v1.3_27.01.2020.pdf
+      status: 200
+    - url: https://www.euronext.com/sites/www.euronext.com/files/euronext-saturn-web_services_specifications_2.8.8.pdf
+      status: 200
+    - url: https://www.euronext.com/en/data/how-access-market-data/euronext-optiq-mdg-cloud
+      status: 200
+    - url: https://github.com/euronext
+      status: 200
+      note: Verified org (euronext.com), six infrastructure forks, no API specs
+  ownership: |
+    Euronext N.V. is an independent, publicly listed company (ticker ENX on
+    Euronext Paris) - it is the parent, not an acquired data arm. It
+    operates exchanges in Amsterdam, Brussels, Dublin, Lisbon, Milan, Oslo,
+    and Paris, and acquired Borsa Italiana (2021, from LSEG), Nord Pool,
+    and Company Webcast among others.
+sources:
+  - url: https://www.euronext.com/en/data/how-access-market-data/web-services
+    type: Documentation
+    note: Euronext Web Services product page - HTTP/JSON REST, tailored commercial offer, contact-form onboarding.
+  - url: https://www.euronext.com/en/data/real-time-data/how-access-market-data
+    type: Documentation
+    note: Lists all access channels - Optiq MDG, Web Services, vendors, brokers, ASP/ESP.
+  - url: https://connect2.euronext.com/sites/default/files/documentation/data/ews_api_-_historical_data_client_specification.pdf
+    type: APIReference
+    note: EWS Historical Data (EOD Summary) client specification v1.0 - JSON, POST-only, token issued at onboarding, fields for indices and cash markets.
+  - url: https://www.euronext.com/sites/www.euronext.com/files/euronext-saturn-web_services_specifications_2.8.8.pdf
+    type: APIReference
+    note: Saturn REST web services specification - JSON/XML/CSV, token in Authorization header, SubmitTrades NEW/AMEND/CANCEL.
+  - url: https://connect.euronext.com/en/it-documentation
+    type: Documentation
+    note: Euronext Connect IT documentation index hosting Optiq MDG, Optiq Files, OEG, and Saturn specification PDFs.
+actions:
+  openapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    Five real documented API/feed products were cataloged in apis.yml
+    (Web Services market data, historical, indices; Saturn reporting;
+    Optiq MDG). No baseURL fields were recorded because Euronext does not
+    publicly document any endpoint hostname - URLs and tokens are issued
+    per client. No OpenAPI was harvested because none is published;
+    fabricating one from the PDFs was out of scope for bootstrap.

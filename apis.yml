@@ -1,0 +1,144 @@
+aid: euronext
+url: https://raw.githubusercontent.com/api-evangelist/euronext/refs/heads/main/apis.yml
+name: Euronext
+kind: company
+description: Euronext N.V. is the leading pan-European exchange operator, running
+  regulated cash and derivatives markets in Amsterdam, Brussels, Dublin, Lisbon, Milan,
+  Oslo, and Paris, and owning Borsa Italiana and power exchange Nord Pool. Its market
+  data arm sells real-time, delayed, historical, index, and reference data through
+  the low-latency Optiq Market Data Gateway (UDP multicast SBE feed, also cloud-delivered),
+  Optiq flat files, and the Euronext Web Services JSON API, alongside the Saturn REST
+  API for MiFID II regulatory reporting. All access is sales-gated and entitlement-managed
+  - client specifications are published as public PDFs but base URLs and tokens are
+  issued only at onboarding, with no self-serve developer portal.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Financial
+- Market Data
+- Stocks
+- Exchange
+- Real-Time
+- Historical Data
+- Indices
+- Reference Data
+- Derivatives
+- Regulatory Reporting
+created: '2026-07-21'
+modified: '2026-07-21'
+specificationVersion: '0.19'
+apis:
+- aid: euronext:euronext-web-services-market-data-api
+  name: Euronext Web Services Market Data API
+  tags:
+  - Market Data
+  - Real-Time
+  - Delayed
+  - Quotes
+  - Trades
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.euronext.com/en/data/how-access-market-data/web-services
+  properties:
+  - url: https://www.euronext.com/en/data/how-access-market-data/web-services
+    type: Documentation
+  - url: https://connect2.euronext.com/en/data/client-specifications
+    type: APIReference
+  description: On-demand real-time, delayed, and reference market data over HTTP in
+    JSON (REST) covering equities, fixed income, ETFs and funds, warrants and certificates,
+    derivatives, commodities, and indices, with intraday interval-bar aggregation.
+    Token authentication; the endpoint URL and user token are issued by Euronext at
+    onboarding and no public base URL is documented.
+- aid: euronext:euronext-web-services-historical-data-api
+  name: Euronext Web Services Historical Data API
+  tags:
+  - Historical Data
+  - End of Day
+  - Time Series
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.euronext.com/en/data/how-access-market-data/web-services
+  properties:
+  - url: https://www.euronext.com/en/data/how-access-market-data/web-services
+    type: Documentation
+  - url: https://connect2.euronext.com/sites/default/files/documentation/data/ews_api_-_historical_data_client_specification.pdf
+    type: APIReference
+  description: End-of-day summary time series (open, high, low, close, last, volumes,
+    turnover, capitalization) for indices and cash markets by ISIN and MIC, requested
+    as JSON over HTTPS using POST only (GET unsupported). Documented in a public client-specification
+    PDF; the request URL and key are provided by Euronext at onboarding.
+- aid: euronext:euronext-web-services-indices-api
+  name: Euronext Web Services Indices API
+  tags:
+  - Indices
+  - Index Data
+  - Reference Data
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.euronext.com/en/data/how-access-market-data/web-services
+  properties:
+  - url: https://www.euronext.com/en/data/how-access-market-data/web-services
+    type: Documentation
+  - url: https://connect2.euronext.com/sites/default/files/documentation/data/EWS%20API%20-%20Indices%20-%20Client%20Specification_v1.3_27.01.2020.pdf
+    type: APIReference
+  description: Index-level data for Euronext indices delivered through the Euronext
+    Web Services JSON API, documented in a dedicated public client-specification PDF.
+    Access is contracted through Euronext Market Data with tokens issued at integration
+    time.
+- aid: euronext:euronext-saturn-reporting-api
+  name: Euronext Saturn Reporting API
+  tags:
+  - Regulatory Reporting
+  - MiFID II
+  - Trade Reporting
+  - Post-Trade
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://connect.euronext.com/en/it-documentation
+  properties:
+  - url: https://connect.euronext.com/en/it-documentation
+    type: Documentation
+  - url: https://www.euronext.com/sites/www.euronext.com/files/euronext-saturn-web_services_specifications_2.8.8.pdf
+    type: APIReference
+  description: REST web services for the Saturn global reporting solution covering
+    MiFID II transaction reporting, trade submission (NEW, AMEND, CANCEL), and commodities
+    positions reporting in JSON, XML, and CSV. HTTPS logon returns a token carried
+    in the Authorization header; user accounts are requested through market-access@euronext.com,
+    so access is member-gated.
+- aid: euronext:euronext-optiq-market-data-gateway
+  name: Euronext Optiq Market Data Gateway (MDG)
+  tags:
+  - Streaming
+  - Multicast
+  - SBE
+  - Low Latency
+  - Order Book
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.euronext.com/en/data/how-access-market-data/euronext-optiq-mdg-cloud
+  properties:
+  - url: https://www.euronext.com/en/data/how-access-market-data/euronext-optiq-mdg-cloud
+    type: Documentation
+  - url: https://connect.euronext.com/en/it-documentation
+    type: APIReference
+  description: Low-latency real-time market data feed for Euronext cash and derivatives
+    markets delivered as UDP multicast messages in Simple Binary Encoding (SBE) with
+    LZ4-compressed snapshots, plus an MDG Lite variant and cloud delivery. Not an
+    HTTP API - interface specifications are published as public PDFs on Euronext Connect
+    and access requires a market data agreement and connectivity provisioning.
+common:
+- type: Website
+  url: https://www.euronext.com/
+- type: Portal
+  url: https://connect.euronext.com/
+- type: Documentation
+  url: https://connect.euronext.com/en/it-documentation
+- type: GitHubOrganization
+  url: https://github.com/euronext
+- type: LinkedIn
+  url: https://www.linkedin.com/company/euronext
+- type: Blog
+  url: https://www.euronext.com/en/news
+- type: Support
+  url: https://www.euronext.com/en/contact
+- type: TermsOfService
+  url: https://www.euronext.com/en/terms-use
+- type: PrivacyPolicy
+  url: https://www.euronext.com/en/privacy-statement
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
