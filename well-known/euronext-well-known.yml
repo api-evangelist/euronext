@@ -1,0 +1,54 @@
+generated: '2026-07-22'
+method: searched
+note: |
+  Probe index of the /.well-known/ discovery surface across every Euronext host
+  referenced by apis.yml. No document returned 200 - www/connect/connect2/live
+  hosts answer 403 (WAF-blocked) for all /.well-known/ paths and 404 for spec
+  and llms.txt paths, and the documented API hosts (gateway.euronext.com,
+  saturn-api-p.euronext.com) expose no discovery documents. Euronext publishes
+  no well-known catalog, security.txt, or OIDC/OAuth discovery metadata.
+hosts:
+- host: https://www.euronext.com
+  documents:
+  - {path: /.well-known/security.txt, status: 403}
+  - {path: /.well-known/openid-configuration, status: 403}
+  - {path: /.well-known/oauth-authorization-server, status: 403}
+  - {path: /.well-known/api-catalog, status: 403}
+  - {path: /.well-known/ai-plugin.json, status: 403}
+  - {path: /openapi.json, status: 404}
+  - {path: /swagger.json, status: 404}
+  - {path: /llms.txt, status: 404}
+- host: https://connect.euronext.com
+  documents:
+  - {path: /.well-known/security.txt, status: 403}
+  - {path: /.well-known/openid-configuration, status: 403}
+  - {path: /.well-known/oauth-authorization-server, status: 403}
+  - {path: /.well-known/api-catalog, status: 403}
+  - {path: /.well-known/ai-plugin.json, status: 403}
+  - {path: /openapi.json, status: 404}
+  - {path: /swagger.json, status: 404}
+  - {path: /llms.txt, status: 404}
+- host: https://connect2.euronext.com
+  documents:
+  - {path: /.well-known/security.txt, status: 403}
+  - {path: /.well-known/openid-configuration, status: 403}
+  - {path: /.well-known/oauth-authorization-server, status: 403}
+  - {path: /.well-known/api-catalog, status: 403}
+  - {path: /.well-known/ai-plugin.json, status: 403}
+  - {path: /openapi.json, status: 404}
+  - {path: /swagger.json, status: 404}
+  - {path: /llms.txt, status: 404}
+- host: https://live.euronext.com
+  documents:
+  - {path: /.well-known/security.txt, status: 403}
+  - {path: /.well-known/openid-configuration, status: 403}
+  - {path: /.well-known/oauth-authorization-server, status: 403}
+  - {path: /.well-known/api-catalog, status: 403}
+  - {path: /.well-known/ai-plugin.json, status: 403}
+  - {path: /openapi.json, status: 404}
+  - {path: /swagger.json, status: 404}
+  - {path: /llms.txt, status: 404}
+- host: https://saturn.euronext.com
+  documents: []
+  note: DNS does not resolve; documented Saturn API hosts are saturn-api-p.euronext.com
+    (production) and saturn-api-h.euronext.com (test), per the Saturn 2.8.8 specification.

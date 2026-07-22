@@ -1,0 +1,49 @@
+generated: '2026-07-22'
+method: searched
+source: |
+  Euronext public client specifications and probes (2026-07-22): Saturn 2.8.8
+  spec PDF (document history + environments), EWS Indices v1.3 / Historical
+  v1.0 spec PDFs, host probes for status pages.
+versioning:
+  scheme: versioned PDF client specifications
+  note: |
+    Euronext versions its APIs through dated, versioned client-specification
+    documents rather than URL or header versioning - Saturn Web Services
+    specification v2.8.8 (07 Dec 2018, history back to v2.8 of 13 Dec 2017),
+    EWS Indices Client Specification v1.3 (27 Jan 2020), EWS EOD Summary Data
+    v1.0 (18 May 2016). Breaking changes are announced inside the
+    specification document history (e.g. v2.8.3 "Warning Message about removal
+    of $4.4 submit and $4.6 get resource").
+  current:
+    saturn: '2.8.8'
+    ews_indices: '1.3'
+    ews_historical: '1.0'
+environments:
+- name: Saturn production
+  url: https://saturn-api-p.euronext.com/
+- name: Saturn test (EUA - External User Acceptance)
+  url: https://saturn-api-h.euronext.com/
+  note: Client testing is organised around EUA periods ahead of production
+    releases.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: |
+    No public deprecation policy and no RFC 8594 Sunset header support is
+    documented. Deprecations are communicated in specification revisions - the
+    Saturn spec v2.8.3 removed the getOverview, getMarketPlaceDetail and
+    getTimeLine resources and pre-announced removal of the submit and get
+    resources.
+status_page: null
+status_page_note: |
+  No public API status page was found - status.euronext.com does not resolve,
+  euronext.statuspage.io is an unclaimed Atlassian placeholder, and no
+  market-status page is published as an API status surface (probed 2026-07-22).
+sla: null
+deprecated_operations:
+- api: Euronext Saturn Reporting API
+  operation: transactionReports/submit
+  note: Removal pre-announced in spec v2.8.3 in favour of submitTx.
+- api: Euronext Saturn Reporting API
+  operation: transactionReports/get
+  note: Removal pre-announced in spec v2.8.3 in favour of getTx.

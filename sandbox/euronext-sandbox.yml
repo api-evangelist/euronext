@@ -1,0 +1,34 @@
+generated: '2026-07-22'
+method: searched
+source: https://www.euronext.com/sites/www.euronext.com/files/euronext-saturn-web_services_specifications_2.8.8.pdf
+scope: Euronext Saturn Reporting API
+note: |
+  The Euronext Web Services market data API publishes no sandbox - the URL and
+  token issued at onboarding are production credentials. Saturn is the only
+  Euronext API with a documented test environment.
+test_environment:
+  name: EUA (External User Acceptance)
+  base_url: https://saturn-api-h.euronext.com/
+  production_url: https://saturn-api-p.euronext.com/
+  separation: Separate hostname; same /SaturnWebServices/rest/ resource paths
+    and the same credential model (logon token + client certificate).
+  note: Client testing is organised around EUA periods ahead of production
+    releases; the specification states example values are for testing
+    throughout the EUA period.
+fixtures:
+- name: Example APA/ARM upload file
+  url: https://www.euronext.com/sites/www.euronext.com/files/saturn_example_of_apa-arm_upload_file.csv
+  description: Published sample CSV for the Saturn file-upload submission path.
+- name: Example OBOE upload file
+  url: https://www.euronext.com/sites/www.euronext.com/files/saturn_example_of_oboe_upload_file.csv
+  description: Published sample CSV for Off Book On Exchange trade reporting.
+- name: Client certificate package
+  url: https://www.euronext.com/sites/www.euronext.com/files/saturn_certifdigicertclient.pfx
+  description: DigiCert client certificate distributed for mutual-TLS setup,
+    with the DigiCert certificate utility (digicertutil.zip) linked from the
+    specification.
+tooling:
+  note: The specification recommends testing the REST API with Postman or curl
+    (or the Saturn UI); it includes worked curl examples against
+    saturn-api-h.euronext.com, including a shortcode/longcode file upload to
+    /SaturnWebServices/rest/files/upload.

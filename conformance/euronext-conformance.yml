@@ -1,0 +1,54 @@
+generated: '2026-07-22'
+method: searched
+source: |
+  Euronext public client specifications and product pages (fetched 2026-07-22):
+  Saturn 2.8.8 spec PDF, EWS Indices v1.3 spec PDF, EWS Historical Data spec
+  PDF, Optiq MDG product pages on euronext.com, github.com/euronext.
+standards:
+- id: mifid-ii-mifir
+  conforms: true
+  evidence: Saturn is Euronext's purpose-built MiFID II / MiFIR solution -
+    RTS22 transaction reporting (ARM), APA pre- and post-trade publication, and
+    Off Book On Exchange trade reporting; the check module validates mandatory
+    RTS22 fields on submission (Saturn spec 2.8.8, section 1).
+- id: iso-6166-isin
+  conforms: true
+  evidence: Instruments are identified by ISIN throughout the Euronext Web
+    Services API (transco.codification "ISIN") and Saturn referential.
+- id: iso-10383-mic
+  conforms: true
+  evidence: Market identification uses ISO 10383 MIC codes (XAMS, XBRU, XLIS,
+    XPAR) as the exchCode parameter in EWS and in the Saturn MIC referential.
+- id: lei
+  conforms: true
+  evidence: Saturn carries LEI (Legal Entity Identifier) codes for reporting
+    parties and exposes a Retrieve LEI Referential function (spec section 5.2).
+- id: fix-sbe
+  conforms: true
+  evidence: The Optiq Market Data Gateway encodes messages in FIX Simple Binary
+    Encoding (SBE); github.com/euronext maintains a fork of
+    real-logic/simple-binary-encoding.
+- id: mutual-tls
+  conforms: true
+  evidence: Saturn uses certificate-based mutual authentication with
+    DigiCert-issued client certificates (spec section 2.2).
+- id: oauth2
+  conforms: false
+  evidence: No OAuth 2.0 anywhere - EWS uses an authKey query parameter and
+    Saturn a proprietary logon-token scheme in the Authorization header.
+- id: oidc
+  conforms: false
+  evidence: No OpenID Connect discovery documents on any Euronext host
+    (/.well-known/openid-configuration blocked/absent on all hosts probed).
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Saturn uses a proprietary StatusCode/Message envelope (200/401/504/600),
+    not application/problem+json.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt is not served on any Euronext host
+    (403/404 on all probes, 2026-07-22).
+- id: openapi
+  conforms: false
+  evidence: No machine-readable API description is published for any Euronext
+    API - all client specifications are PDF documents.

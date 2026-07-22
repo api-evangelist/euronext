@@ -1,0 +1,29 @@
+# Euronext
+
+> Euronext N.V. is the leading pan-European exchange operator (Amsterdam, Brussels, Dublin, Lisbon, Milan, Oslo, Paris). Its APIs are sales-gated and entitlement-managed: client specifications are public PDFs, but endpoint credentials are issued only at onboarding. There is no self-serve developer portal, no OpenAPI, and no OAuth - the Euronext Web Services JSON API uses an issued authKey (POST-only), the Saturn MiFID II reporting REST API uses a logon token in the Authorization header plus mutual TLS, and the Optiq Market Data Gateway is a UDP multicast SBE feed, not HTTP.
+
+## APIs
+
+- [Euronext Web Services Market Data API](https://www.euronext.com/en/data/how-access-market-data/web-services): Real-time, delayed, and reference market data as JSON; POST-only; gateway.euronext.com/api with an issued authKey.
+- [Euronext Web Services Historical Data API](https://www.euronext.com/en/data/how-access-market-data/web-services): End-of-day summary time series by ISIN and MIC; URL and key issued at onboarding.
+- [Euronext Web Services Indices API](https://www.euronext.com/en/data/how-access-market-data/web-services): Index-level data; documented endpoints instrumentDetail and intraday on gateway.euronext.com.
+- [Euronext Saturn Reporting API](https://connect.euronext.com/en/it-documentation): MiFID II transaction reporting, APA publication, and OBOE trade reporting; production https://saturn-api-p.euronext.com/, test (EUA) https://saturn-api-h.euronext.com/, paths under /SaturnWebServices/rest/.
+- [Euronext Optiq Market Data Gateway](https://www.euronext.com/en/data/how-access-market-data/euronext-optiq-mdg-cloud): Low-latency UDP multicast feed in FIX Simple Binary Encoding with LZ4-compressed snapshots; cloud delivery available.
+
+## Specs
+
+- [Saturn Web Services specification v2.8.8 (PDF)](https://www.euronext.com/sites/www.euronext.com/files/euronext-saturn-web_services_specifications_2.8.8.pdf): Full REST function reference - AuthenticateUser logon, transactionReports get/getTx/submit/submitTx, quotes, files upload, referentials.
+- [EWS Indices Client Specification v1.3 (PDF)](https://connect2.euronext.com/sites/default/files/documentation/data/EWS%20API%20-%20Indices%20-%20Client%20Specification_v1.3_27.01.2020.pdf): instrumentDetail and intraday endpoints, parameters, and fields.
+- [EWS Historical Data Client Specification (PDF)](https://connect2.euronext.com/sites/default/files/documentation/data/ews_api_-_historical_data_client_specification.pdf): EOD summary time-series request and field reference.
+- [Client specifications index](https://connect2.euronext.com/en/data/client-specifications): All Euronext market data client-specification PDFs.
+
+## Docs
+
+- [How to access market data](https://www.euronext.com/en/data/how-access-market-data): Access channels - Optiq MDG, Web Services, vendors, brokers.
+- [Euronext Connect IT documentation](https://connect.euronext.com/en/it-documentation): Optiq MDG, Optiq Files, OEG, and Saturn specification library.
+- [Euronext Connect portal](https://connect.euronext.com/): Client portal (login-gated content).
+
+## Contact
+
+- Market data / Web Services: databyeuronext@euronext.com
+- Saturn account requests: market-access@euronext.com

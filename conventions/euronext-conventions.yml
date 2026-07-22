@@ -1,0 +1,57 @@
+generated: '2026-07-22'
+method: searched
+source: |
+  Euronext public client specifications (fetched 2026-07-22): Saturn 2.8.8
+  spec PDF, EWS Indices v1.3 spec PDF, EWS Historical Data v1.0 spec PDF.
+authentication:
+  style: |
+    EWS market data - authKey query parameter issued at onboarding, POST-only.
+    Saturn - logon token in the Authorization header plus mutual TLS.
+  artifact: authentication/euronext-authentication.yml
+http_methods:
+  note: |
+    The Euronext Web Services API is POST-only - the specification states the
+    GET method is not supported; request parameters ride the query string of
+    the documented gateway URLs (gateway.euronext.com/api/instrumentDetail,
+    /api/intraday). Saturn functions are POSTs to
+    /SaturnWebServices/rest/<resource>/<action> paths (get, getTx, submit,
+    submitTx, upload).
+formats:
+  ews: JSON only
+  saturn: JSON, XML and CSV (FIX reserved for future use)
+idempotency:
+  supported: false
+  note: No idempotency-key mechanism is documented for any Euronext API.
+    Saturn deduplicates business-level trade submissions by trade reference
+    within its check module, but there is no documented HTTP idempotency
+    contract.
+pagination:
+  style: offset-limit
+  parameters: [offset, limit]
+  note: Saturn retrieval functions page with offset and limit query parameters
+    (e.g. /SaturnWebServices/rest/transactionReports/getTx?offset=0&limit=1).
+    EWS time-series requests are bounded by beginningDate/endingDate or period
+    (1W..10Y) parameters instead of pagination.
+field_expansion:
+  supported: false
+  note: EWS uses a fixed view=FULL parameter; no sparse fieldsets.
+request_tracing:
+  note: No request-id header convention is documented.
+versioning:
+  style: versioned PDF client specifications per API; no URL or header
+    versioning.
+  artifact: lifecycle/euronext-lifecycle.yml
+error_envelope:
+  shape: StatusCode + Message attributes on every Saturn response; EWS
+    responses carry a status field ("0" = normal).
+  artifact: errors/euronext-problem-types.yml
+rate_limits:
+  note: No rate-limit signaling (headers or documented quotas) appears in any
+    public specification; access volume is governed contractually by the
+    market data agreement / membership.
+session_rules:
+  note: |
+    Saturn allows one active session per credential (a second logon
+    invalidates the first), binds the session token to the logon client IP,
+    expires tokens after a configurable idle period, and auto-logs-off idle
+    clients.

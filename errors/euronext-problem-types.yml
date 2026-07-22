@@ -1,0 +1,41 @@
+generated: '2026-07-22'
+method: searched
+source: https://www.euronext.com/sites/www.euronext.com/files/euronext-saturn-web_services_specifications_2.8.8.pdf
+format: proprietary
+note: |
+  Euronext publishes no RFC 9457 problem-details catalog and no OpenAPI to
+  derive one from. This catalog is taken verbatim from the Saturn REST API
+  client specification v2.8.8, which documents per-function status codes in a
+  StatusCode/Message envelope. The Euronext Web Services (market data) PDFs
+  document no error codes beyond the token/URL being rejected; an
+  unauthenticated call to gateway.euronext.com returns HTTP 401.
+envelope:
+  fields: [StatusCode, Message]
+  description: Every Saturn function response carries a StatusCode integer and a
+    Message string alongside the payload.
+problems:
+- status: 200
+  title: Success
+  scope: All Saturn functions
+- status: 401
+  title: Access denied ! Check your login/password
+  scope: AuthenticateUser (logon)
+  remediation: Verify the Saturn username/password encoding (MD5 then base64,
+    lowercase hexadecimal) carried in the Authorization header.
+- status: 504
+  title: Session expired
+  scope: AuthenticateUser (logon) / any function called with an expired token
+  remediation: Log on again via AuthenticateUser to obtain a fresh session token;
+    tokens expire after a configurable idle period and are bound to the logon IP.
+- status: 600
+  title: Failed
+  scope: Business functions (SubmitTrades, RetrieveTradesDetails, SubmitAPAQuotes,
+    file upload and related functions)
+  remediation: Inspect the Message field and the per-record feedback statuses in
+    the response data; the check module validates mandatory RTS22 fields and
+    APA consistency before acceptance.
+- status: token-expired
+  title: Token expired
+  scope: Any Saturn request after token lifetime elapses
+  remediation: Re-authenticate; note a client may hold only one active session
+    at a time.

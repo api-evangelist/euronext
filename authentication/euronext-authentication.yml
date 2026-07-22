@@ -1,0 +1,70 @@
+generated: '2026-07-22'
+method: searched
+source: |
+  Euronext public client-specification PDFs (fetched and read 2026-07-22):
+  - https://www.euronext.com/sites/www.euronext.com/files/euronext-saturn-web_services_specifications_2.8.8.pdf
+  - https://connect2.euronext.com/sites/default/files/documentation/data/EWS%20API%20-%20Indices%20-%20Client%20Specification_v1.3_27.01.2020.pdf
+  - https://connect2.euronext.com/sites/default/files/documentation/data/ews_api_-_historical_data_client_specification.pdf
+summary:
+  types: [apiKey, token, mutualTLS]
+  api_key_in: [query]
+  oauth2_flows: []
+  note: No OAuth2/OIDC anywhere. All credentials are issued by Euronext at
+    onboarding; there is no self-serve signup.
+schemes:
+- name: EWS authKey
+  api: Euronext Web Services (Market Data / Historical / Indices)
+  type: apiKey
+  in: query
+  parameter: authKey
+  description: |
+    The Euronext Web Services JSON API authenticates with an authentication key
+    passed as the authKey query parameter on the gateway.euronext.com/api
+    endpoints (e.g. /api/instrumentDetail, /api/intraday). The URL and Key are
+    provided by Euronext to the client at integration onboarding; requests use
+    the POST HTTP method only (GET is not supported for the EOD Summary service).
+    An unauthenticated request to https://gateway.euronext.com/api/instrumentDetail
+    returns HTTP 401 (probed 2026-07-22).
+  sources:
+  - https://connect2.euronext.com/sites/default/files/documentation/data/EWS%20API%20-%20Indices%20-%20Client%20Specification_v1.3_27.01.2020.pdf
+  - https://connect2.euronext.com/sites/default/files/documentation/data/ews_api_-_historical_data_client_specification.pdf
+- name: Saturn session token
+  api: Euronext Saturn Reporting API
+  type: token
+  in: header
+  parameter: Authorization
+  description: |
+    The client first calls the AuthenticateUser logon function
+    (/SaturnWebServices/rest/Authentication/AuthenticateUser) over HTTPS with the
+    Saturn username and password - the Username:Password concatenation is MD5
+    encrypted then base64 encoded (hexadecimal, lowercase) and carried in the
+    Authorization HTTP header. Saturn validates the credentials and returns a
+    session token that must be sent in the Authorization header of every
+    subsequent request. Tokens expire after a configurable period ("Token
+    expired" error); Saturn pins the client IP from the logon request and
+    rejects requests from other IPs; only one active session per credential is
+    allowed (a new logon invalidates the previous session). Logon status codes:
+    200 Success, 401 Access denied, 504 Session expired.
+  sources:
+  - https://www.euronext.com/sites/www.euronext.com/files/euronext-saturn-web_services_specifications_2.8.8.pdf
+- name: Saturn mutual TLS
+  api: Euronext Saturn Reporting API
+  type: mutualTLS
+  description: |
+    In addition to token authentication, Saturn uses certificate-based mutual
+    authentication - the client presents a client certificate (a DigiCert-issued
+    .pfx is distributed by Euronext, with a published DigiCert certificate
+    utility for conversion) and both parties verify each other's certificates
+    before the encrypted channel is established.
+  sources:
+  - https://www.euronext.com/sites/www.euronext.com/files/euronext-saturn-web_services_specifications_2.8.8.pdf
+- name: Optiq MDG entitlement
+  api: Euronext Optiq Market Data Gateway
+  type: none
+  description: |
+    Not an HTTP API - the Optiq Market Data Gateway is a UDP multicast SBE feed.
+    Access control is contractual and network-level: a market data agreement,
+    entitlement management, and connectivity provisioning (no HTTP
+    authentication scheme).
+  sources:
+  - https://www.euronext.com/en/data/how-access-market-data/euronext-optiq-mdg-cloud
