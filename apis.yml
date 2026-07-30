@@ -11,6 +11,18 @@ description: Euronext N.V. is the leading pan-European exchange operator, runnin
   API for MiFID II regulatory reporting. All access is sales-gated and entitlement-managed
   - client specifications are published as public PDFs but base URLs and tokens are
   issued only at onboarding, with no self-serve developer portal.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/euronext.png
 tags:
 - Financial
