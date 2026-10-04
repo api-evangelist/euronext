@@ -38,6 +38,17 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/euronext.png
 tags:
+- Finance
+- Market Data
+- Stocks
+- Exchange
+- Real-Time
+- Historical Data
+- Indices
+- Reference Data
+- Derivatives
+- Regulatory Reporting
+tags_raw:
 - Financial
 - Market Data
 - Stocks
