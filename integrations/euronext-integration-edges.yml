@@ -311,9 +311,9 @@ edges:
       legal_name: THE IRISH STOCK EXCHANGE PUBLIC LIMITED COMPANY
       country: IE
     detected_by: sweep-capital-markets.py
-    detected: '2026-10-15'
+    detected: '2026-10-19'
   detected_by: sweep-capital-markets.py
-  first_seen: '2026-10-15'
+  first_seen: '2026-10-19'
 - partner_name: ESMA (EU)
   partner: null
   type: contract
@@ -334,7 +334,7 @@ edges:
     matched_domain: euronext.com
     matched_by: domain+verified:euronext.com
     detected_by: sweep-capital-markets.py
-    detected: '2026-10-15'
+    detected: '2026-10-19'
     other_registrations:
     - registered_name: Euronext Lisbon – Sociedade Gestora de Mercados Regulamentados, S.A.
       register_id: 529900K0OK4J5I7A5V66
@@ -357,7 +357,7 @@ edges:
       competent_authority: Netherlands Authority for the Financial Markets (AFM) - NLAF
       home_member_state: NETHERLANDS
   detected_by: sweep-capital-markets.py
-  first_seen: '2026-10-15'
+  first_seen: '2026-10-19'
 - partner_name: Twelve Data
   partner: twelvedata
   partner_match: aggregator
@@ -370,14 +370,44 @@ edges:
   matched_by: mic:XBRU->domain+verified:euronext.com
   mic: XBRU
   detected_by: sweep-capital-markets.py
-  first_seen: '2026-10-15'
+  first_seen: '2026-10-19'
   other_mics:
   - XPAR
   - XAMS
   - XLIS
+- partner_name: Snowflake Marketplace
+  partner: snowflake
+  partner_match: aggregator
+  type: marketplace
+  marketplace: snowflake-marketplace
+  channel: distribution
+  relationship: distribution-channel
+  direction: third-party
+  evidence: https://app.snowflake.com/marketplace/providers/GZSVZT4US9
+  category: data product listing
+  contract_reference:
+    register: Snowflake Marketplace providers (app.snowflake.com/marketplace/providers, rendered; names only, Wikidata
+      P856 identity step)
+    spec_file: null
+    role: data-marketplace-seller
+    registered_name: Euronext
+    matched_domain: euronext.com
+    matched_by: domain
+    listings: 3
+    sample_listings: []
+    signal_note: 'participation: the provider lists data products on this marketplace; counts are context'
+    detected_by: sweep-data-marketplaces.py
+    detected: '2026-10-20'
+    identity_source: wikidata
+    identity_note: wikidata P856 euronext.com for 'Euronext' (labelled identity step)
+  detected_by: sweep-data-marketplaces.py
+  detected: '2026-10-20'
 generated: '2026-10-15'
 method: searched
 checked:
 - https://api.twelvedata.com/exchanges
 - https://registers.esma.europa.eu/solr/esma_registers_bench_entities/select
 - https://www.iso20022.org/sites/default/files/ISO10383_MIC/ISO10383_MIC.csv
+- https://app.snowflake.com/marketplace/providers
+source:
+- https://app.snowflake.com/marketplace/providers
