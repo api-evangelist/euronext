@@ -1,4 +1,4 @@
-# Euronext (euronext)
+# Euronext
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,131 +66,93 @@
 
 Euronext N.V. is the leading pan-European exchange operator, running regulated cash and derivatives markets in Amsterdam, Brussels, Dublin, Lisbon, Milan, Oslo, and Paris, and owning Borsa Italiana and power exchange Nord Pool. Its market data arm sells real-time, delayed, historical, index, and reference data through the low-latency Optiq Market Data Gateway (UDP multicast SBE feed, also cloud-delivered), Optiq flat files, and the Euronext Web Services JSON API, alongside the Saturn REST API for MiFID II regulatory reporting. All access is sales-gated and entitlement-managed - client specifications are published as public PDFs but base URLs and tokens are issued only at onboarding, with no self-serve developer portal.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/euronext/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/euronext/refs/heads/main/apis.yml)
+**Areas:** Finance · Market Data · Stocks · Exchange · Real-Time · Historical Data · Indices · Reference Data · Derivatives · Regulatory Reporting
 
-## Tags
+## Euronext on APIs.io
 
-- Financial
-- Market Data
-- Stocks
-- Exchange
-- Real-Time
-- Historical Data
-- Indices
-- Reference Data
-- Derivatives
-- Regulatory Reporting
+Everything profiled for Euronext is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/euronext/](https://apis.io/providers/euronext/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (5)
 
-- **Created:** 2026-07-21
-- **Modified:** 2026-07-21
+- [Euronext Web Services Market Data API](https://apis.io/apis/euronext/euronext-web-services-market-data-api/) — On-demand real-time, delayed, and reference market data over HTTP in JSON (REST) covering equities, fixed income, ETFs and funds, warrants and certificates,…
+- [Euronext Web Services Historical Data API](https://apis.io/apis/euronext/euronext-web-services-historical-data-api/) — End-of-day summary time series (open, high, low, close, last, volumes, turnover, capitalization) for indices and cash markets by ISIN and MIC, requested as…
+- [Euronext Web Services Indices API](https://apis.io/apis/euronext/euronext-web-services-indices-api/) — Index-level data for Euronext indices delivered through the Euronext Web Services JSON API, documented in a dedicated public client-specification PDF.…
+- [Euronext Saturn Reporting API](https://apis.io/apis/euronext/euronext-saturn-reporting-api/) — REST web services for the Saturn global reporting solution covering MiFID II transaction reporting, trade submission (NEW, AMEND, CANCEL), and commodities…
+- [Euronext Optiq Market Data Gateway (MDG)](https://apis.io/apis/euronext/euronext-optiq-market-data-gateway/) — Low-latency real-time market data feed for Euronext cash and derivatives markets delivered as UDP multicast messages in Simple Binary Encoding (SBE) with…
 
-## APIs
+### Published properties
 
-### Euronext Web Services Market Data API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-On-demand real-time, delayed, and reference market data over HTTP in JSON (REST) covering equities, fixed income, ETFs and funds, warrants and certificates, derivatives, commodities, and indices, with intraday interval-bar aggregation. Token authentication; the endpoint URL and user token are issued by Euronext at onboarding and no public base URL is documented.
+#### Security (2)
 
-- **Human URL:** [https://www.euronext.com/en/data/how-access-market-data/web-services](https://www.euronext.com/en/data/how-access-market-data/web-services)
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Tags
+- [Euronext Authentication](https://apis.io/security/euronext/euronext-authentication/)
+- [Euronext Domain Security](https://apis.io/security/euronext/euronext-domain-security/)
 
-- Market Data
-- Real-Time
-- Delayed
-- Quotes
-- Trades
+## Where to find this API
 
-#### Properties
-
-- [Documentation](https://www.euronext.com/en/data/how-access-market-data/web-services)
-- [API Reference](https://connect2.euronext.com/en/data/client-specifications)
-
-### Euronext Web Services Historical Data API
-
-End-of-day summary time series (open, high, low, close, last, volumes, turnover, capitalization) for indices and cash markets by ISIN and MIC, requested as JSON over HTTPS using POST only (GET unsupported). Documented in a public client-specification PDF; the request URL and key are provided by Euronext at onboarding.
-
-- **Human URL:** [https://www.euronext.com/en/data/how-access-market-data/web-services](https://www.euronext.com/en/data/how-access-market-data/web-services)
-
-#### Tags
-
-- Historical Data
-- End of Day
-- Time Series
-
-#### Properties
-
-- [Documentation](https://www.euronext.com/en/data/how-access-market-data/web-services)
-- [API Reference (Client Specification PDF)](https://connect2.euronext.com/sites/default/files/documentation/data/ews_api_-_historical_data_client_specification.pdf)
-
-### Euronext Web Services Indices API
-
-Index-level data for Euronext indices delivered through the Euronext Web Services JSON API, documented in a dedicated public client-specification PDF. Access is contracted through Euronext Market Data with tokens issued at integration time.
-
-- **Human URL:** [https://www.euronext.com/en/data/how-access-market-data/web-services](https://www.euronext.com/en/data/how-access-market-data/web-services)
-
-#### Tags
-
-- Indices
-- Index Data
-- Reference Data
-
-#### Properties
-
-- [Documentation](https://www.euronext.com/en/data/how-access-market-data/web-services)
-- [API Reference (Client Specification PDF)](https://connect2.euronext.com/sites/default/files/documentation/data/EWS%20API%20-%20Indices%20-%20Client%20Specification_v1.3_27.01.2020.pdf)
-
-### Euronext Saturn Reporting API
-
-REST web services for the Saturn global reporting solution covering MiFID II transaction reporting, trade submission (NEW, AMEND, CANCEL), and commodities positions reporting in JSON, XML, and CSV. HTTPS logon returns a token carried in the Authorization header; user accounts are requested through market-access@euronext.com, so access is member-gated.
-
-- **Human URL:** [https://connect.euronext.com/en/it-documentation](https://connect.euronext.com/en/it-documentation)
-
-#### Tags
-
-- Regulatory Reporting
-- MiFID II
-- Trade Reporting
-- Post-Trade
-
-#### Properties
-
-- [Documentation](https://connect.euronext.com/en/it-documentation)
-- [API Reference (Web Services Specification PDF)](https://www.euronext.com/sites/www.euronext.com/files/euronext-saturn-web_services_specifications_2.8.8.pdf)
-
-### Euronext Optiq Market Data Gateway (MDG)
-
-Low-latency real-time market data feed for Euronext cash and derivatives markets delivered as UDP multicast messages in Simple Binary Encoding (SBE) with LZ4-compressed snapshots, plus an MDG Lite variant and cloud delivery. Not an HTTP API - interface specifications are published as public PDFs on Euronext Connect and access requires a market data agreement and connectivity provisioning.
-
-- **Human URL:** [https://www.euronext.com/en/data/how-access-market-data/euronext-optiq-mdg-cloud](https://www.euronext.com/en/data/how-access-market-data/euronext-optiq-mdg-cloud)
-
-#### Tags
-
-- Streaming
-- Multicast
-- SBE
-- Low Latency
-- Order Book
-
-#### Properties
-
-- [Documentation](https://www.euronext.com/en/data/how-access-market-data/euronext-optiq-mdg-cloud)
-- [API Reference (IT Documentation)](https://connect.euronext.com/en/it-documentation)
-
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.euronext.com/)
-- [Portal](https://connect.euronext.com/)
 - [Documentation](https://connect.euronext.com/en/it-documentation)
-- [GitHub Organization](https://github.com/euronext)
-- [LinkedIn](https://www.linkedin.com/company/euronext)
-- [Blog](https://www.euronext.com/en/news)
+- [Getting started](https://www.euronext.com/en/data/how-access-market-data)
 - [Support](https://www.euronext.com/en/contact)
-- [Terms of Service](https://www.euronext.com/en/terms-use)
-- [Privacy Policy](https://www.euronext.com/en/privacy-statement)
+- [Blog](https://www.euronext.com/en/news)
+- [Terms of service](https://www.euronext.com/en/terms-use)
+- [Privacy policy](https://www.euronext.com/en/privacy-statement)
+- [GitHub](https://github.com/euronext)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 29.0** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 69.6 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 64.3 |
+| Access clarity | 21.1 |
+
+**Agent readiness 5.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 23.1** — Securities & Market Data
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/euronext/](https://apis.io/providers/euronext/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Euronext: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/euronext/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
